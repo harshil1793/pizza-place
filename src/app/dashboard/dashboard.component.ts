@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { MdSnackBar } from '@angular/material';
 
 @Component({
   selector: 'dashboard',
@@ -7,6 +8,12 @@ import { DatePipe } from '@angular/common';
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit{
+
+  startNewOrder:boolean = true;
+  isInputFieldEmpty: boolean = true;
+
+  flag: string = 'pizza';
+
   orderModel:any;
   date:number = Date.now();
   item_name: string;
@@ -17,13 +24,16 @@ export class DashboardComponent implements OnInit{
   price:number;
   total: number = 0.00;
 
+  animal: string;
+  name: string;
+
   order:any;
 
   showWell:boolean = false;
   mockData:boolean = false;
 
   i:number = 0;
-  constructor(){
+  constructor(public snackBar: MdSnackBar){
     this.orderModel = 
     {
         "items": [
@@ -46,14 +56,59 @@ export class DashboardComponent implements OnInit{
             ]
     }
     console.log(this.date);
-    console.log(JSON.stringify(this.orderModel));
+    console.log(JSON.stringify(this.order));
 
   }
+
   ngOnInit(){
     for(this.i; this.i < this.orderModel.items.length; this.i++){
       this.total = this.total + this.orderModel.items[this.i].price;
     }
   }
+
+  // HEADER - START ORDER LOGIC
+  startOrder(name: string, phone: string) {
+    this.startNewOrder = false;
+    if (name != undefined && phone != "") {
+      this.order= {
+      "name": name,
+      "phone": phone
+      }
+    }
+    else{
+      this.order= {
+      "name": name
+      }
+    }
+  }
+
+  // CHECK THE LENGTH OF THE INPUT FIELD
+  checkInput(name: string) {
+    if ( name.length > 0){
+      this.isInputFieldEmpty = false;
+    }
+    else {
+      this.isInputFieldEmpty = true;
+    }
+    console.log(name)
+  }
+
+  // START NEW ORDER FLUSH THE MODEL
+  newOrder() {
+    this.startNewOrder = !this.startNewOrder;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
   passValues(name: string, phone: string) {
     if (name != undefined && phone != "") {
@@ -136,4 +191,6 @@ export class DashboardComponent implements OnInit{
       this.showWell = true;
     }
   }
+
+  
 }

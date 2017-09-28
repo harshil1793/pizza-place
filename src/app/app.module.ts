@@ -7,6 +7,30 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
+import { MdAutocompleteModule,
+  MdButtonToggleModule,
+  MdCardModule, 
+  MdChipsModule,
+  MdDatepickerModule,
+  MdDialogModule,
+  MdGridListModule,
+  MdIconModule,
+  MdInputModule,
+  MdListModule,
+  MdMenuModule,
+  MdNativeDateModule,
+  MdProgressBarModule,
+  MdProgressSpinnerModule,
+  MdRadioModule,
+  MdSelectModule,
+  MdSidenavModule,
+  MdSliderModule,
+  MdSlideToggleModule,
+  MdSnackBarModule,
+  MdTabsModule,
+  MdToolbarModule,
+  MdTooltipModule } from '@angular/material';
+
 import { AboutComponent } from './about/about.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
@@ -18,14 +42,17 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { ContactComponent } from './contact/contact.component';
 
 
+
 import { 
         MdButtonModule,
-        MdCheckboxModule} from '@angular/material';
+        MdCheckboxModule,} from '@angular/material';
 
 @NgModule({
   exports: [
     MdButtonModule,
     MdCheckboxModule,
+    MdDialogModule,
+    MdSnackBarModule,
   ],
   declarations: [
     AppComponent,
@@ -35,7 +62,7 @@ import {
     RepoDetailComponent,
     HomeComponent,
     ContactComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

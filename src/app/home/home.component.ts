@@ -27,6 +27,18 @@ export class HomeComponent {
 
   // Function get the values from the form and create a model according to the values.
   submitValues(name: string, phone: string) {
-    this.dashboardComponent.passValues(name, phone);
+    if (name != undefined && phone != "") {
+      this.dashboardComponent.order= {
+      "name": name,
+      "phone": phone
+      }
+    }
+    else{
+      this.dashboardComponent.order= {
+      "name": name
+      }
+    }
+    console.log(this.dashboardComponent.order);
+    // this.dashboardComponent.passValues(name, phone);
   }
 }

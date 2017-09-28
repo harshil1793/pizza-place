@@ -1,150 +1,203 @@
 <nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#" style="color: #333; font-size: 18px; letter-spacing: 0.3rem; font-weight: 600;"> PIZZA PLACE </a>
+      <a class="navbar-brand" [routerLink]="['/dashboard']" style="color: #333; font-size: 18px; letter-spacing: 0.3rem; font-weight: 600;"> PIZZA PLACE </a>
     </div>
-    <ul class="nav navbar-nav navbar-right">
-      <!--<li><a href="#"> New Order </a></li>-->
-      <li><a> --{{order.name}} </a></li>
-      <li style="padding-top: 0.7rem; padding-right: 2rem;">        
-          <button class="add-to-order" (click)="addToOrder()">New Order</button>
+    
+    <!-- STARING NEW ORDER -->
+    <ul class="nav navbar-nav navbar-right" *ngIf="startNewOrder">
+      <li style="padding-top: 0.7rem; padding-right: 2rem;">
+          <input type="text" name="name" #name placeholder="Name" (keyup)="checkInput(name.value)">
+      </li>
+      <li style="padding-top: 0.7rem; padding-right: 2rem;">
+          <input type="number" #phone placeholder="Phone">
+      </li>
+      <li style="padding-top: 0.7rem; padding-right: 2rem;" >        
+        <button *ngIf="!isInputFieldEmpty" class="add-to-order" (click)="startOrder(name.value, phone.value)">Start Order</button>
+        <button *ngIf="isInputFieldEmpty" class="add-to-order">Start Order</button>
       </li>
     </ul>
+
+    <!-- ORDER STARTED  -->
+    <ul class="nav navbar-nav navbar-right" *ngIf="!startNewOrder">
+        <li *ngIf="!startNewOrder" class="customer-name"><a> {{order.name}} </a></li>
+        <li *ngIf="!startNewOrder" style="padding-top: 0.7rem; padding-right: 2rem;">        
+            <button class="add-to-order" (click)="newOrder()">New Order</button>
+        </li>
+    </ul>
+
   </div>
 </nav>
+
 <div>
     <div class="well" style="margin-bottom: 0;" *ngIf="showWell">
-        <button class="add-to-order" (click)="addToOrder()">Add to order</button>
+        <button *ngIf="showWell" class="add-to-order" (click)="addToOrder()">Add to order</button>
         <span style="color:#666;">Click here to send this order</span>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="col-xs-12 col-sm-4 col-ms-4 col-lg-4 menu-style menu-grib">
 
-        <h4>Pizzas</h4>
-        <div style="padding-bottom:4rem; margin: auto; width: 50%;">
-            <a class="button--primary button--primary-blue" (click)="setValues('item_name', 'Cheese Pizza')">Cheese Pizza</a>
-        </div>
 
-        <div style="padding-bottom:4rem; margin: auto; width: 50%;">
-            <a class="button--primary button--primary-blue" (click)="setValues('item_name', 'Veggi Pizza')">Veggi Pizza</a>
-        </div>
-
-        <h4>Size</h4>
-        <div style="padding-bottom:4rem; margin: auto; height:20vh">
-            <div class="col-xs-12 col-sm-6 col-ms-6 col-lg-6">
-                <a (click)="setValues('size', 'Slice')">
-                <!--<i class="material-icons icon icon-rotate icon-slice">local_pizza</i>-->
-                <img src="../images/slice.png" style="width:5rem"/>
-            </a>
+<div class="container-fluid padding-zero" >
+    <!-- <div class="col-xs-12 col-sm-4 col-ms-4 col-lg-4 menu-style menu-grib">
+        <a class="add-to-order" (click)="flag = pizza">Pizzas</a>        
+        <a class="add-to-order" (click)="flag = gujarati">Gujarati Thali's</a> 
+        <a class="add-to-order" (click)="flag = snacks">Hot Snacks</a>
+    </div> -->
+    <nav class="navbar">
+            <div class="container-fluid padding-zero">
+              <ul class="nav navbar-nav navbar-right" style="float: left !important; padding: 0 3rem">
+                <li style="padding-top: 0.7rem; padding-right: 2rem;">
+                    <a class="add-to-order" (click)="flag = pizza">Pizzas</a>
+                </li>
+                <li style="padding-top: 0.7rem; padding-right: 2rem;">
+                    <a class="add-to-order" (click)="flag = gujarati">Gujarati Thali's</a>
+                </li>
+                <li style="padding-top: 0.7rem; padding-right: 2rem;" >
+                    <a class="add-to-order" (click)="flag = snacks">Hot Snacks</a>
+                </li>
+              </ul>
             </div>
-            
-            <div class="col-xs-12 col-sm-6 col-ms-6 col-lg-6">
-                <a (click)="setValues('size', 'XL')">
-                <!--<i class="material-icons icon icon-pie">lens</i>-->
-                <img src="../images/pizza.png" style="width:10rem"/>
+    </nav>
+
+        <!-- PIZZA SESSION -->
+        <div class="col-xs-12 col-sm-4 col-ms-4 col-lg-4 menu-style menu-grib" *ngIf="flag==pizza">
+
+            <h4>Pizzas</h4>
+            <div style="padding-bottom:4rem; margin: auto; width: 50%;">
+                <a class="button--primary button--primary-blue" (click)="setValues('item_name', 'Cheese Pizza')">Cheese Pizza</a>
+            </div>
+
+            <div style="padding-bottom:4rem; margin: auto; width: 50%;">
+                <a class="button--primary button--primary-blue" (click)="setValues('item_name', 'Veggi Pizza')">Veggi Pizza</a>
+            </div>
+
+            <h4>Size</h4>
+            <div style="padding-bottom:4rem; margin: auto; height:20vh">
+                <div class="col-xs-12 col-sm-6 col-ms-6 col-lg-6">
+                    <a (click)="setValues('size', 'Slice')">
+                    <!--<i class="material-icons icon icon-rotate icon-slice">local_pizza</i>-->
+                    <img src="../images/slice.png" style="width:5rem"/>
                 </a>
-            </div>
-        </div>
-        <h4>Quantity</h4>
-        <div style="padding-bottom:4rem; margin: auto; height:20vh">
-            <div ><!--class="col-xs-12 col-sm-12 col-ms-12 col-lg-12"-->
-                <!--<input type="text" value="1" [(ngModel)]="quantity">-->
-                <button class="badge badge-custom" (click)="setValues('quantity', '1')">1</button>
-                <button class="badge badge-custom" (click)="setValues('quantity', '2')">2</button>
-                <button class="badge badge-custom" (click)="setValues('quantity', '3')">3</button>
-                <button class="badge badge-custom" (click)="setValues('quantity', '4')">4</button>
-                <button class="badge badge-custom" (click)="setValues('quantity', '5')">5</button>
-                <button class="badge badge-custom" (click)="setValues('quantity', '6')">6</button>
-                <button class="badge badge-custom" (click)="setValues('quantity', '7')">7</button>
-                <button class="badge badge-custom" (click)="setValues('quantity', '8')">8</button>
-                <button class="badge badge-custom" (click)="setValues('quantity', '9')">9</button>
-                <button class="badge badge-custom" (click)="setValues('quantity', '10')">10</button>
-            </div>
-            
-        </div>
-
-    </div>
-
-    <div class="col-xs-12 col-sm-4 col-ms-4 col-lg-4 menu-style menu-grib">
-
-        
-
-        <h4>Toppings</h4>
-        <div style="padding-bottom:4rem; margin: auto;">
-            <div style="padding-bottom:2rem;">
-                <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'No Tomatos')">
-                    <span>
-                        <img src="../images/tomato.png" style="width:5rem"/>
-                        <span style="padding-left:2rem;"> No Tomatos</span>
-                    </span>
-                </a>
-            </div>
-
-            <div style="padding-bottom:2rem;">            
-                <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'No Peppers')">
-                    <span>
-                        <img src="../images/pepper.png" style="width:5rem"/>
-                        <span style="padding-left:2rem;">No Peppers</span>
-                    </span>
-                </a>
-            </div>
-            <div style="padding-bottom:2rem;">
-                <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'No Olives')">
-                    <span>
-                        <img src="../images/olive.png" style="width:5rem"/>
-                        <span style="padding-left:2rem;">No Olives</span>
-                    </span>
-                </a>
-            </div>
-            <div style="padding-bottom:2rem;">
-                <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'No Jalapenos')">
-                    <span>
-                        <img src="../images/pepper_2.png" style="height:7rem;padding-right:1rem;"/>
-                        <span style="padding-left:2rem;">No Jalapenos</span>
-                    </span>
-                </a>
-            </div>
-            <div style="padding-bottom:2rem;">
-                <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'Spicy')">
-                    <span>
-                        <img src="../images/chilli.png" style="height:7rem; padding-right:2rem"/>
-                        <span style="padding-left:2rem;">Spicy</span>
-                    </span>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-4 col-ms-4 col-lg-4">
-        <h4>Order</h4>
-        <div>
-            <p style="color:#999">Date : {{date | date:'medium'}}</p>
-            <div *ngFor="let item of orderModel?.items">
-                <p>
-                    <span style="padding-right:1rem">{{item?.quantity}}</span>{{item?.item_name}} - {{item?.size}}
-                    <span class="pull-right">{{item?.price}}</span>
-                </p>
-                <div *ngFor="let topping of item?.toppings" style="padding-left:3rem; color: #999; ">
-                    <p style="margin-bottom: 0.5rem;">{{topping}}</p>
+                </div>
+                
+                <div class="col-xs-12 col-sm-6 col-ms-6 col-lg-6">
+                    <a (click)="setValues('size', 'XL')">
+                    <!--<i class="material-icons icon icon-pie">lens</i>-->
+                    <img src="../images/pizza.png" style="width:10rem"/>
+                    </a>
                 </div>
             </div>
-            <div style="color: #15c26b" *ngIf="mockData">
-                <p>
-                    <span style="padding-right:1rem">{{quantity}}</span>{{item_name}} - {{size}}
-                    <span class="pull-right">{{price}}</span>
-                </p>
-                <div *ngFor="let topping of toppings" style="padding-left:3rem; color: #999; ">
-                    <p style="margin-bottom: 0.5rem;">{{topping}}</p>
+            <h4>Quantity</h4>
+            <div style="padding-bottom:4rem; margin: auto; height:20vh">
+                <div ><!--class="col-xs-12 col-sm-12 col-ms-12 col-lg-12"-->
+                    <!--<input type="text" value="1" [(ngModel)]="quantity">-->
+                    <button class="badge badge-custom" (click)="setValues('quantity', '1')">1</button>
+                    <button class="badge badge-custom" (click)="setValues('quantity', '2')">2</button>
+                    <button class="badge badge-custom" (click)="setValues('quantity', '3')">3</button>
+                    <button class="badge badge-custom" (click)="setValues('quantity', '4')">4</button>
+                    <button class="badge badge-custom" (click)="setValues('quantity', '5')">5</button>
+                    <button class="badge badge-custom" (click)="setValues('quantity', '6')">6</button>
+                    <button class="badge badge-custom" (click)="setValues('quantity', '7')">7</button>
+                    <button class="badge badge-custom" (click)="setValues('quantity', '8')">8</button>
+                    <button class="badge badge-custom" (click)="setValues('quantity', '9')">9</button>
+                    <button class="badge badge-custom" (click)="setValues('quantity', '10')">10</button>
                 </div>
             </div>
-            <div style="color: #333; border-top: 1px solid #ccc; padding-top:4rem;">
-                <div >
-                    <p style="padding: 0.5rem 0; float: left;">
-                        Total
-                        <span style="float:right !important">$ {{total}}</span>
+        </div>
+
+        <!-- GUJARATI THALI'S -->
+        <div class="col-xs-12 col-sm-4 col-ms-4 col-lg-4 menu-style menu-grib" *ngIf="flag==gujarati">
+            <h4>Gujarati</h4>
+            <div style="padding-bottom:4rem; margin: auto; width: 50%;">
+                <a class="button--primary button--primary-blue" (click)="setValues('item_name', 'Cheese Pizza')">Veg Thali</a>
+            </div>
+
+            <div style="padding-bottom:4rem; margin: auto; width: 50%;">
+                <a class="button--primary button--primary-blue" (click)="setValues('item_name', 'Veggi Pizza')">Tiffin</a>
+            </div>
+
+            <div style="padding-bottom:4rem; margin: auto; width: 50%;">
+                <a class="button--primary button--primary-blue" (click)="setValues('item_name', 'Veggi Pizza')">Khichdi</a>
+            </div>
+        </div>
+
+        <!-- TOPPINGS  -->
+        <div class="col-xs-12 col-sm-4 col-ms-4 col-lg-4 menu-style menu-grib" *ngIf="flag==pizza">
+            <h4>Toppings</h4>
+            <div style="padding-bottom:4rem; margin: auto;">
+                <div style="padding-bottom:2rem;">
+                    <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'No Tomatos')">
+                        <span>
+                            <img src="../images/tomato.png" style="width:5rem"/>
+                            <span style="padding-left:2rem;"> No Tomatos</span>
+                        </span>
+                    </a>
+                </div>
+
+                <div style="padding-bottom:2rem;">            
+                    <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'No Peppers')">
+                        <span>
+                            <img src="../images/pepper.png" style="width:5rem"/>
+                            <span style="padding-left:2rem;">No Peppers</span>
+                        </span>
+                    </a>
+                </div>
+                <div style="padding-bottom:2rem;">
+                    <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'No Olives')">
+                        <span>
+                            <img src="../images/olive.png" style="width:5rem"/>
+                            <span style="padding-left:2rem;">No Olives</span>
+                        </span>
+                    </a>
+                </div>
+                <div style="padding-bottom:2rem;">
+                    <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'No Jalapenos')">
+                        <span>
+                            <img src="../images/pepper_2.png" style="height:7rem;padding-right:1rem;"/>
+                            <span style="padding-left:2rem;">No Jalapenos</span>
+                        </span>
+                    </a>
+                </div>
+                <div style="padding-bottom:2rem;">
+                    <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'Spicy')">
+                        <span>
+                            <img src="../images/chilli.png" style="height:7rem; padding-right:2rem"/>
+                            <span style="padding-left:2rem;">Spicy</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-ms-4 col-lg-4">
+            <h4>Order</h4>
+            <div>
+                <p style="color:#999">Date : {{date | date:'medium'}}</p>
+                <div *ngFor="let item of orderModel?.items">
+                    <p>
+                        <span style="padding-right:1rem">{{item?.quantity}}</span>{{item?.item_name}} - {{item?.size}}
+                        <!-- <span class="pull-right">{{item?.price}}</span> -->
                     </p>
+                    <div *ngFor="let topping of item?.toppings" style="padding-left:3rem; color: #999; ">
+                        <p style="margin-bottom: 0.5rem;">{{topping}}</p>
+                    </div>
+                </div>
+                <div style="color: #15c26b" *ngIf="mockData">
+                    <p>
+                        <span style="padding-right:1rem">{{quantity}}</span>{{item_name}} - {{size}}
+                        <span class="pull-right">{{price}}</span>
+                    </p>
+                    <div *ngFor="let topping of toppings" style="padding-left:3rem; color: #999; ">
+                        <p style="margin-bottom: 0.5rem;">{{topping}}</p>
+                    </div>
+                </div>
+                <div style="color: #333; border-top: 1px solid #ccc; padding-top:4rem;">
+                    <div>
+                        <button *ngIf="showWell" class="add-to-order" (click)="addToOrder()">Add to order</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    
 </div>
