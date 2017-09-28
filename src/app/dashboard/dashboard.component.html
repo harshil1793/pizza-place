@@ -1,12 +1,14 @@
 <nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Pizza Palace</a>
+      <a class="navbar-brand" href="#" style="color: #333; font-size: 18px; letter-spacing: 0.3rem; font-weight: 600;"> PIZZA PLACE </a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"> New Order </a></li>
-      <li><a href="#"> Akash Patel </a></li>
-      <li><a href="#"> Logout </a></li>
+      <!--<li><a href="#"> New Order </a></li>-->
+      <li><a> --{{order.name}} </a></li>
+      <li style="padding-top: 0.7rem; padding-right: 2rem;">        
+          <button class="add-to-order" (click)="addToOrder()">New Order</button>
+      </li>
     </ul>
   </div>
 </nav>
@@ -21,24 +23,24 @@
 
         <h4>Pizzas</h4>
         <div style="padding-bottom:4rem; margin: auto; width: 50%;">
-            <a href="#" class="button--primary button--primary-blue" (click)="setValues('item_name', 'Cheese Pizza')">Cheese Pizza</a>
+            <a class="button--primary button--primary-blue" (click)="setValues('item_name', 'Cheese Pizza')">Cheese Pizza</a>
         </div>
 
         <div style="padding-bottom:4rem; margin: auto; width: 50%;">
-            <a href="#" class="button--primary button--primary-blue" (click)="setValues('item_name', 'Veggi Pizza')">Veggi Pizza</a>
+            <a class="button--primary button--primary-blue" (click)="setValues('item_name', 'Veggi Pizza')">Veggi Pizza</a>
         </div>
 
         <h4>Size</h4>
         <div style="padding-bottom:4rem; margin: auto; height:20vh">
             <div class="col-xs-12 col-sm-6 col-ms-6 col-lg-6">
-                <a href="#" (click)="setValues('size', 'Slice')">
+                <a (click)="setValues('size', 'Slice')">
                 <!--<i class="material-icons icon icon-rotate icon-slice">local_pizza</i>-->
                 <img src="../images/slice.png" style="width:5rem"/>
             </a>
             </div>
             
             <div class="col-xs-12 col-sm-6 col-ms-6 col-lg-6">
-                <a href="#" (click)="setValues('size', 'XL')">
+                <a (click)="setValues('size', 'XL')">
                 <!--<i class="material-icons icon icon-pie">lens</i>-->
                 <img src="../images/pizza.png" style="width:10rem"/>
                 </a>
@@ -71,40 +73,40 @@
         <h4>Toppings</h4>
         <div style="padding-bottom:4rem; margin: auto;">
             <div style="padding-bottom:2rem;">
-                <a href="#" class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'Tomatos')">
+                <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'No Tomatos')">
                     <span>
                         <img src="../images/tomato.png" style="width:5rem"/>
-                        <span style="padding-left:2rem;">Tomatos</span>
+                        <span style="padding-left:2rem;"> No Tomatos</span>
                     </span>
                 </a>
             </div>
 
             <div style="padding-bottom:2rem;">            
-                <a href="#" class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'Peppers')">
+                <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'No Peppers')">
                     <span>
                         <img src="../images/pepper.png" style="width:5rem"/>
-                        <span style="padding-left:2rem;">Peppers</span>
+                        <span style="padding-left:2rem;">No Peppers</span>
                     </span>
                 </a>
             </div>
             <div style="padding-bottom:2rem;">
-                <a href="#" class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'Olives')">
+                <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'No Olives')">
                     <span>
                         <img src="../images/olive.png" style="width:5rem"/>
-                        <span style="padding-left:2rem;">Olives</span>
+                        <span style="padding-left:2rem;">No Olives</span>
                     </span>
                 </a>
             </div>
             <div style="padding-bottom:2rem;">
-                <a href="#" class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'Jalapenos')">
+                <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'No Jalapenos')">
                     <span>
                         <img src="../images/pepper_2.png" style="height:7rem;padding-right:1rem;"/>
-                        <span style="padding-left:2rem;">Jalapenos</span>
+                        <span style="padding-left:2rem;">No Jalapenos</span>
                     </span>
                 </a>
             </div>
             <div style="padding-bottom:2rem;">
-                <a href="#" class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'Spicy')">
+                <a class="button--primary-veggi button--primary-green" (click)="setValues('toppings', 'Spicy')">
                     <span>
                         <img src="../images/chilli.png" style="height:7rem; padding-right:2rem"/>
                         <span style="padding-left:2rem;">Spicy</span>

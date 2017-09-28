@@ -9,8 +9,8 @@ import { RepoDetailComponent } from './github/repo-detail/repo-detail.component'
 import { ContactComponent } from './contact/contact.component';
 
 export const rootRouterConfig: Routes = [
-  { path: '', component: DashboardComponent },
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'about', component: AboutComponent },
   { path: 'github', component: RepoBrowserComponent,
     children: [

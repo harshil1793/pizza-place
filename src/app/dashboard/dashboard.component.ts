@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit{
   price:number;
   total: number = 0.00;
 
+  order:any;
 
   showWell:boolean = false;
   mockData:boolean = false;
@@ -54,6 +55,21 @@ export class DashboardComponent implements OnInit{
     }
   }
 
+  passValues(name: string, phone: string) {
+    if (name != undefined && phone != "") {
+      this.order= {
+      "name": name,
+      "phone": phone
+      }
+    }
+    else{
+      this.order= {
+      "name": name
+      }
+    }
+    console.log('Model: ', this.order)
+  }
+
   addPizzaToOrder(item_name:string, key:string){
     this.itemId = 1;
     if (this.itemId == 1){
@@ -71,6 +87,7 @@ export class DashboardComponent implements OnInit{
         'toppings': []
     })
   }
+  
   addToOrder(){
     this.itemId = 1;
     if (this.itemId == 1){
